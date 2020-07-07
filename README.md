@@ -17,7 +17,7 @@ The design of this database is subject to update.
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
-|email|string|null: false|
+|email|string|null: false, unique: true|
 |password|string|null: false|
 |icon|string||
 |profile|text||
