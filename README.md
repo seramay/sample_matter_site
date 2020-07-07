@@ -1,24 +1,88 @@
 # README
+The design of this database is subject to update.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# sample_matter_site
 
-Things you may want to cover:
+## companies tables
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+|overview|text||
+|image|string||
+### associations
+- has_many :recruitments
+- has_many :users
 
-* Ruby version
+## users tables
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+|email|string|null: false|
+|password|string|null: false|
+|icon|string||
+|profile|text||
+|company_id|references|null: false, foreign_key: true|
+### associations
+- has_many :applications
+- has_many :recruitments, through: :applications
+- belongs_to :company
 
-* System dependencies
+## applications tables
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|recruitment_id|rederences|null: false, foreign_key: true|
+### associations
+- belongs_to :user
+- belongs_to :recruitment
 
-* Configuration
+## rcruitments tables
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+|content|text|null:false|
+|company_id|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+### associations
+- belongs_to :company
+- belongs_to :category
+- has_many :images, dependent: destroy
+- has_many :applications
+- has_many :users, through: :applications
+- has_many :recruitments_tags
+- has_many :tags, through: :recruitments_tags
 
-* Database creation
+## recruitments_tags tables
+|Column|Type|Options|
+|------|----|-------|
+|recruitment_id|references|null: false, foreign_key: true|
+|tag_id|references|null: false, foreign_key: true|
+### associations
+- belongs_to :recruitment
+- belongs_to :tag
 
-* Database initialization
+## tags tables
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+### associations
+- has_many :recruitments_tags
+- has_many :recruitments, through: :recruitments_tags
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## images tables
+|Column|Type|Options|
+|------|----|-------|
+|name|string||
+|recruitment_id|references|null: false, foreign_key: true|
+### associations
+- belongs_to :recruitment
 
-* Deployment instructions
-
-* ...
+## categories table
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null:false|
+|ancestry|string||
+### associations
+- has_many :recruitments
+- has_ancestry
