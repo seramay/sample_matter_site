@@ -1,2 +1,31 @@
-%h1 Companies#new
-%p Find me in app/views/companies/new.html.erb
+.companies_wrapper
+  %p
+    Q: form投稿式に企業名、企業概要、画像などを入力させて投稿させるが、この作業をユーザーレベルで行えるようにしていいのか疑問。
+    %br/
+    %br/
+    Todo: ユーザーがサインインして登録した場合は、その企業には必ず登録したユーザーが登録されている。
+    %br/
+    基本的にはユーザー側から登録済みの企業を選択することはできず、企業側から所属中のユーザーを追加することができるようにする。
+    %br/
+  = form_with url: new_company_path, class: :company_form do |f|
+    *---* 入力フォーム *---* editでは登録ユーザーを編集できるフォームがあるため、テンプレートにするのは不可能。
+    .company_form--name
+      = f.text_field :name, maxlength: 30, placeholder: "会社名(30文字まで)"
+    .company_form--overview
+      = f.text_area :overview, maxlength: 1000, placeholder: "会社概要(1000文字まで)"
+    .company_form--image
+      = f.file_field :image
+    .company_form--button
+      %p ※ この登録を行ったユーザーは自動的にこの企業の所属として登録されます。よろしいですか？
+      = f.submit "決定"
+
+%h1 Companies#show
+%p データベースに情報がないとアドレスにアクセスできないのでいったん放置。
+.companies_recruitment_wrapper
+  ここはその企業の募集の一覧を表示(company.recruitment)
+  .companies_recruitment_wrapper__index
+    .companies_recruitment_wrapper__index--images
+    .companies_recruitment_wrapper__index--images
+    .companies_recruitment_wrapper__index--images
+    .companies_recruitment_wrapper__index--images
+  .companies_recruitment_wrapper__overview ここは企業の写真、概要欄(company(id))

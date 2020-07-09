@@ -1,2 +1,21 @@
-%h1 Companies#edit
-%p Find me in app/views/companies/edit.html.erb
+.companies_wrapper
+  %p
+    このページには企業に所属しているユーザー出なければ飛べない。link_toの引数にcurrent_user.company辺りを持たせておく。
+    %br/
+    %br/
+    Todo: このユーザーもしくはこのユーザーがこの企業に追加した別のユーザー以外、企業の概要を含めた情報を編集できないようにしておく必要があるかもしれない。
+    %br/
+    基本的にはユーザー側から登録済みの企業を選択することはできず、企業側から所属中のユーザーを追加することができるようにする。
+    %br/
+  = form_with url: new_company_path, class: :company_form do |f|
+    *---* 入力フォーム *---* editでは登録ユーザーを編集できるフォームがあるため、テンプレートにするのは不可能。
+    .company_form--name
+      = f.text_field :name, maxlength: 30, placeholder: "会社名(30文字まで)"
+    .company_form--overview
+      = f.text_area :overview, maxlength: 1000, placeholder: "会社概要(1000文字まで)"
+    .company_form--image
+      = f.file_field :image
+    .company_form--employees
+      = f.text_field :user_id, placeholoder: "登録されている従業員、fields_forか？"
+    .company_form--button
+      = f.submit "決定"

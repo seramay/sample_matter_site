@@ -2,6 +2,7 @@ body{
   width: 100%;
 }
 
+
 // ヘッダーバー
 .header_var{
   background-color: $mainColor; // 背景は最終的には白で良い。
@@ -18,9 +19,12 @@ body{
   }
 }
 
-// yield挿入位置調整
+// body, yield挿入位置調整
 .contents_wrapper{
+  width: 100%;
+  height: 100%;
   padding-top: 70px;
 }
+
 
 // フッターバー
